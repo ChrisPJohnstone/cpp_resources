@@ -16,6 +16,20 @@ LRESULT CALLBACK MainWindowCallback(
         {
             PAINTSTRUCT Paint;
             HDC DeviceContext = BeginPaint(Window, &Paint);
+            
+            /*
+            -----------------------------------------------
+            This (and other wingdi functions) only work
+            if you add `-lgdi32` to compile command
+            -----------------------------------------------
+            
+            int X = Paint.rcPaint.left;
+            int Y = Paint.rcPaint.top;
+            int Width = Paint.rcPaint.right - Paint.rcPaint.left;
+            int Height = Paint.rcPaint.bottom - Paint.rcPaint.top;
+            PatBlt(DeviceContext, X, Y, Width, Height, BLACKNESS);
+            */
+
             FillRect(DeviceContext, &Paint.rcPaint, (HBRUSH) (COLOR_WINDOWTEXT));
             EndPaint(Window, &Paint);
         }
